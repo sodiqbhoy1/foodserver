@@ -13,7 +13,8 @@ app.use(express.json());
 
 app.use(cors({
   origin: 'https://foodexpress-neon.vercel.app', // or your frontend URL
-  credentials: true
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']
 }));
 
 // Connect to the toy box (MongoDB)
