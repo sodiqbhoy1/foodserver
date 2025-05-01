@@ -8,14 +8,14 @@ dotenv.config() // Read the secret map (.env file)
 
 const app = express();
 
-// Middleware: Unpack gift boxes (JSON data)
-app.use(express.json());
 
 app.use(cors({
   origin: 'https://foodexpress-neon.vercel.app', // or your frontend URL
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']
 }));
+// Middleware: Unpack gift boxes (JSON data)
+app.use(express.json());
 
 // Connect to the toy box (MongoDB)
 mongoose.connect(process.env.MONGODB_URI)
