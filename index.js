@@ -12,8 +12,8 @@ const app = express();
 // Middleware: Unpack gift boxes (JSON data)
 app.use(express.json());
 app.use(cors({
-  // origin: 'https://foodexpress-neon.vercel.app', // or your frontend URL
-  origin: 'http://localhost:5173', // or your frontend URL
+  origin: 'https://foodexpress-neon.vercel.app', // or your frontend URL
+  // origin: 'http://localhost:5173', // or your frontend URL
   credentials: true,
 
 }));
