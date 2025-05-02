@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const bcrypt = require('bcryptjs');
+
 
 // Create a schema for the buyer
 const customerSchema = new mongoose.Schema({
@@ -27,17 +27,6 @@ const customerSchema = new mongoose.Schema({
     resetPasswordToken: String,       // Add this
     resetPasswordExpires: Date, 
 
-});
-
-// Hash the password before saving the buyer
-customerSchema.pre('save', async function(next) {
-    if (!this.isModified('password')) return next();
-    try {
-        this.password = await bcrypt.hash(this.password, 10);
-        next();
-    } catch (error) {
-        next(error);
-    }
 });
 
 // Create a model for the buyer

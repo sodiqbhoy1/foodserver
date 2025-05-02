@@ -12,12 +12,16 @@ const vendorSignup = async (req, res)=>{
         if (existingVendor){
             return res.status(400).json({error: 'Email already exists'});
         }
+
+         // Hash the password
+    const hashedPassword = await bcrypt.hash(password, 10);
+
         // Create a new vendor
         const newVendor = new Vendor({
             fullName,
             email,
             phone,
-            password,
+            password: hashedPassword,
             storeName,
             storeAddress,
             city,

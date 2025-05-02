@@ -25,6 +25,9 @@ const couriersignup = async (req, res) => {
       return res.status(400).json({ error: "Email already exists" });
     }
 
+     // Hash the password
+     const hashedPassword = await bcrypt.hash(password, 10);
+
     // Create a new user
     const newCourier = new Courier({
       fullName,
@@ -33,7 +36,7 @@ const couriersignup = async (req, res) => {
       address,
       state,
       city,
-      password,
+      password: hashedPassword,
       experienceInLogistics,
       ecommerceLogistics,
       courierLicense

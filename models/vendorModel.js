@@ -48,16 +48,6 @@ const vendorSchema = new mongoose.Schema({
 
 });
 
-// Hash the password before saving the seller
-vendorSchema.pre('save', async function(next) {
-    if (!this.isModified('password')) return next();
-    try {
-        this.password = await bcrypt.hash(this.password, 10);
-        next();
-    } catch (error) {
-        next(error);
-    }
-});
 
 // Create a model for the seller
 const vendor= mongoose.model('Vendor', vendorSchema);

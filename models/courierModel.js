@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const bcrypt = require('bcryptjs');
 
 // Create a schema for the buyer
 const courierSchema = new mongoose.Schema({
@@ -68,16 +67,6 @@ const courierSchema = new mongoose.Schema({
 
 });
 
-// Hash the password before saving the buyer
-courierSchema.pre('save', async function(next) {
-    if (!this.isModified('password')) return next();
-    try {
-        this.password = await bcrypt.hash(this.password, 10);
-        next();
-    } catch (error) {
-        next(error);
-    }
-});
 
 // Create a model for the buyer
 const courier = mongoose.model('Courier', courierSchema);
