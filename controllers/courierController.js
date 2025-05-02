@@ -134,7 +134,7 @@ const courierForgotPassword = async (req, res) => {
       },
     });
 
-    const resetUrl = `http://localhost:5173/reset-password/${token}`;
+    const resetUrl = `http://localhost:5173/reset-password/courier/${token}`;
     await transporter.sendMail({
       from: "FoodXpress <noreply@Foodxpress.com>",
       to: user.email,

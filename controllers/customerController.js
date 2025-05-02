@@ -77,6 +77,7 @@ const customerSignin = async (req, res) => {
     }
 };
 
+// Forgot password
 const customerForgotPassword = async (req, res) => {
     const { email } = req.body;
 
@@ -114,7 +115,7 @@ const customerForgotPassword = async (req, res) => {
             }
         });
 
-        const resetUrl = `http://localhost:5173/reset-password/${token}`;
+        const resetUrl = `http://localhost:5173/reset-password/customer/${token}`;
         await transporter.sendMail({
             from: 'FoodXpress <noreply@Foodxpress.com>',
             to: existingCustomer.email,
@@ -133,6 +134,9 @@ const customerForgotPassword = async (req, res) => {
     }
 };
 
+
+// Reset password
+// This function handles the password reset process
 const CustomerresetPassword = async (req, res) => {
     const { token } = req.params; // Get token from URL parameter
     const { newPassword } = req.body;

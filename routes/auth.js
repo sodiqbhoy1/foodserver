@@ -1,9 +1,9 @@
 const express = require('express')
 const router = express.Router();
 
-const {customersignup, customerSignin, customerForgotPassword} = require('../controllers/customerController')
+const {customersignup, customerSignin, customerForgotPassword, CustomerresetPassword} = require('../controllers/customerController')
 const {vendorSignup, vendorSignin, getAllVendors} = require('../controllers/vendorController')
-const {couriersignup, courierSignin, courierForgotPassword} = require('../controllers/courierController')
+const {couriersignup, courierSignin, courierForgotPassword, CourierresetPassword} = require('../controllers/courierController')
 
 
 // signup routes
@@ -20,6 +20,14 @@ router.post('/signin/courier', courierSignin)
 router.post('/forgotpassword/courier', courierForgotPassword )
 router.post('/forgotpassword/customer', customerForgotPassword )
 // router.post('/forgotpassword/vendor', vendorForgotPassword )
+
+
+
+// reset password route
+router.post('/reset-password/courier/:token', CourierresetPassword);  // The token is sent in the URL
+router.post('/reset-password/customer/:token', CustomerresetPassword);  // The token is sent in the URL
+
+
 
 // get all vendors
 router.get('/vendors', getAllVendors)
