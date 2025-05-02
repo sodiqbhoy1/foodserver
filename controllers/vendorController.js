@@ -131,7 +131,7 @@ const VendorForgotPassword = async (req, res) => {
           }
       });
 
-      const resetUrl = `http://localhost:5173/reset-password/Vendor/${token}`;
+      const resetUrl = `https://foodexpress-neon.vercel.app/reset-password/Vendor/${token}`;
       await transporter.sendMail({
           from: 'FoodXpress <noreply@Foodxpress.com>',
           to: existingVendor.email,
