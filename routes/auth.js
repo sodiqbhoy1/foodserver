@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router();
 
-const {customersignup, customerSignin, customerForgotPassword, CustomerresetPassword} = require('../controllers/customerController')
+const {customersignup, customerSignin, customerForgotPassword, CustomerresetPassword, customerDetails} = require('../controllers/customerController')
 const {vendorSignup, vendorSignin, getAllVendors, VendorForgotPassword, VendorresetPassword} = require('../controllers/vendorController')
 const {couriersignup, courierSignin, courierForgotPassword, CourierresetPassword} = require('../controllers/courierController')
 
@@ -33,5 +33,9 @@ router.post('/reset-password/vendor/:token', VendorresetPassword);  // The token
 
 // get all vendors
 router.get('/vendors', getAllVendors)
+
+
+// get customer details o
+router.get('/customer/details', customerDetails) // This route is commented out in the original code, uncomment if needed
 
 module.exports = router

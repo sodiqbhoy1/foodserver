@@ -62,13 +62,7 @@ const customerSignin = async (req, res) => {
         // Return the token
         res.status(200).json({
             message: 'Signin successful',
-            token: token,
-            customer: {
-                fullName: existingCustomer.name,
-                Address: existingCustomer.address,
-                email: existingCustomer.email,
-                phone: existingCustomer.phone
-            }
+            token: token
         });
 
     } catch (error) {
@@ -170,4 +164,30 @@ const CustomerresetPassword = async (req, res) => {
     }
 };
 
-module.exports = { customersignup, customerSignin, customerForgotPassword, CustomerresetPassword };
+// get customer details
+
+const customerDetails = async (req, res)=>{
+
+    try{
+
+        const authHeader = req.headers.authorization;
+        if (!authHeader) {
+            return res.status(401).json({ message: 'No token provided' });
+        }
+        const token = authHeader.split(' ')[1]; // Assuming the format is "Bearer <token>"
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        const customer = await Customer.findById(decoded.userId).select('-password'); // Exclude password from the response
+        if (!customer) {
+            return res.status(404).json({ message: 'Customer not found' });
+        }
+        res.status(200).json(customer);
+    }
+
+    catch(error){
+        console.error('Error fetching customer details:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+
+}
+
+module.exports = { customersignup, customerSignin, customerForgotPassword, CustomerresetPassword, customerDetails };
